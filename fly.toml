@@ -1,0 +1,25 @@
+app = "telegram-fly-bot"
+
+[build]
+  image = "python:3.11-slim"
+
+[env]
+  PORT = "10000"
+
+[[services]]
+  internal_port = 10000
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["http"]
+
+  [[services.tcp_checks]]
+    interval = 10000
+    timeout = 2000
+    grace_period = "10s"
+    port = 10000
